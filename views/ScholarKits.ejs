@@ -40,11 +40,12 @@
         <section class="kits">
             <h2 id="scroll-to-element" style="text-align: center;">CHECK OUT OUR KITS</h2> <br>
             <div class="kit-group">
+                <% var imgArr = [ '/images/pack1.jpg', '/images/pack2.jpg', '/images/pack3.jpg' ] %>
                 <h3>Budget Kits</h3>
                 <div class="kit-container">
-                    <% products.forEach(item => { %>
+                    <% products.slice(0,3).forEach((item, index) => { %>
                         <div class="kit">
-                            <img src="images/pack1.jpg" alt="Budget Kit 1">
+                            <img src="<%- imgArr[index] %>" alt="Budget Kit 1">
                             <h4><%- item.name %></h4>
                             <p><%- item.description %></p>
                             <span class="price"><%- item.price %> Sar</span>
