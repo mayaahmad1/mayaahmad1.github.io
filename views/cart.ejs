@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+    .cart {
+        margin: 50px auto;
+        max-width: 800px;
+        text-align: center;
+    }
+
+    .cart h2 {
+        font-size: 45px;
+			margin-bottom: 30px;
+			font-weight: bolder;
+			text-align: center;
+			
+    }
+    
+    .cart-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 30px;
+    }
+    
+    .cart-item {
+        border-radius: 5px;
+        margin: 20px;
+        padding: 20px;
+        text-align: center;
+        width: 300px;
+    }
+    
+    .cart-item img {
+        max-width: 150px;
+        margin: 0 auto 20px;
+    }
+    
+    .cart-item h4 {
+        margin-bottom: 10px;
+    }
+    
+    .cart-item .price {
+        color: #0FA3B1;
+        font-weight: bold;
+    }
+    
+    .remove-button {
+        color: #F7A072;
+        display: block;
+        margin-top: 20px;
+    }
+    
+    /* Styles for the total section */
+    .cart-total {
+        margin-top: 50px;
+        text-align: center;
+    }
+    
+    .cart-total p {
+        font-size: 25px;
+        display: inline-block;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+    
+    .cart-total .price {
+        color: #0FA3B1;
+        font-weight: bold;
+    }
+    
+    .checkout-button {
+        background-color: #F7A072;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        display: block;
+        font-size: 18px;
+        font-weight: bold;
+        margin: 50px auto 0;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        width: 200px;
+    }
+    
+    .checkout-button:hover {
+        background-color: #EDDEA4;
+    }</style>
+</head>
+
+<body>
+    <%- include('./partials/header') %>
+    <main>
+        <section class="cart">
+            <h2>Cart</h2>
+            <div class="cart-container">
+                <% cartItems.forEach(item => { %>
+                    <div class="cart-item">
+                        <img src="/images/LOGO.png" alt="Product 1">
+                        <h4><%- item.name %></h4>
+                        <span class="price"><%- item.price %> SAR</span>
+                        <a href="/cart/remove/<%- item._id %>" class="remove-button">Remove</a>
+                    </div>
+                <% }) %>
+            </div>
+        </section>
+        <section>
+            <br>
+            <div class="cart-total">
+                <p>Total:</p>
+                <span class="price"><%- totalPrice %> SAR</span>
+            </div>
+            <a href="checkout.html" class="checkout-button">Checkout</a>
+            </div>
+
+        </section>
+    </main>
+
+    </div>
+
+    <%- include('./partials/footer') %>
+
+    <script>
+       // Get all the remove buttons
+        const removeButtons = document.querySelectorAll('.remove-button');
+
+        // Add click event listener to each remove button
+        removeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Get the cart item that contains the remove button
+                const cartItem = button.closest('.cart-item');
+                // Remove the cart item from the cart container
+                cartItem.remove();
+                // Update the total price
+                updateTotal();
+            });
+        });
+
+        // Function to update the total price
+        function updateTotal() {
+            // Get all the cart items
+            const cartItems = document.querySelectorAll('.cart-item');
+            let totalPrice = 0;
+            // Loop through all the cart items and add up their prices
+            cartItems.forEach(item => {
+                const priceElement = item.querySelector('.price');
+                const price = parseFloat(priceElement.textContent.replace('$', ''));
+                totalPrice += price;
+            });
+            // Update the total price
+            const totalElement = document.querySelector('.cart-total .price');
+            totalElement.textContent =  totalPrice.toFixed(2) + ' SAR';
+        }
+
+        // Call updateTotal() when the page loads
+        updateTotal();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+<header>
+  
+  <a href="/admin_panel">
+    <div class="logo">
+      <img src="/images/LOGO.png" class="rounded-circle" alt="logo"  width="110" height="110">
+      <h1 style="float: right; padding: 40px 10px;"> Scholarkits</h1>
+    </div>
+  </a>
+  
+  <nav>
+    <ul>
+      <li><a href="/admin_panel">Home</a></li>
+      <li><a href="/about.html">About Us</a></li>
+      <% if(isAdmin){ %>
+        <li><a href="/logout">Logout</a></li>
+      <% } else { %>
+        <li><a href="/signin_up.html">Sign In</a></li>
+      <% } %>
+
+    </ul>
+  </nav>
+</header>
