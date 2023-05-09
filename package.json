@@ -2,7 +2,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node app.js"
-     "dev": "nodemon app.js"
+    
   },
   "dependencies": {
     "cookie-parser": "^1.4.6",
